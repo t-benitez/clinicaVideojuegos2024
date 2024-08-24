@@ -221,7 +221,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"duck",
-"speed": 10.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 0.4,
@@ -350,7 +350,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 10.0
+"speed": 25.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_whux2"]
@@ -369,7 +369,7 @@ texture_filter = 1
 position = Vector2(-0.625, 1.5)
 scale = Vector2(0.015, 0.015)
 sprite_frames = SubResource("SpriteFrames_6wmvf")
-animation = &"duck"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="RunCol" type="CollisionShape2D" parent="."]
