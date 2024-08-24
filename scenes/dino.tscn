@@ -250,7 +250,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -369,9 +369,8 @@ texture_filter = 1
 position = Vector2(-0.625, 1.5)
 scale = Vector2(0.015, 0.015)
 sprite_frames = SubResource("SpriteFrames_6wmvf")
-animation = &"idle"
+animation = &"duck"
 autoplay = "idle"
-frame_progress = 0.569773
 
 [node name="RunCol" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
