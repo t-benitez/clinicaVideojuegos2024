@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cft0hfp5xfpf2"]
+
+[ext_resource type="Texture2D" uid="uid://ugu80argehcj" path="res://assets/props - enemys/obstacle3.png" id="1_ei41h"]
+
+[node name="Log" type="Area2D"]
+scale = Vector2(0.7, 0.7)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ei41h")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(170, -70, -43, -78, -218, -76, -226, -26, -240, -18, -240, 72, -51, 86, 187, 98, 206, 54, 207, -15)

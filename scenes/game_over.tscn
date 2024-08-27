@@ -1,33 +1,73 @@
-[gd_scene load_steps=5 format=3 uid="uid://lotwuige1aee"]
+[gd_scene load_steps=9 format=3 uid="uid://c4ohrh21dcct3"]
 
-[ext_resource type="FontFile" uid="uid://s15272omc2m3" path="res://assets/fonts/retro.ttf" id="1_ykggm"]
+[ext_resource type="Texture2D" uid="uid://c8rv1utw43mjd" path="res://assets/screens/fail screen.png" id="1_0avn7"]
+[ext_resource type="Texture2D" uid="uid://dsm3ctnuwdd6w" path="res://assets/screens/record  screen.png" id="2_wpjxa"]
+[ext_resource type="FontFile" uid="uid://ougb0hvauetw" path="res://assets/items + ui/LilitaOne-Regular.ttf" id="3_k0goy"]
+[ext_resource type="Texture2D" uid="uid://dh3i3hg0g0exo" path="res://assets/items + ui/restart.png" id="4_2ss4q"]
+[ext_resource type="Texture2D" uid="uid://c70ipn8amsn2w" path="res://assets/items + ui/score_holder.png" id="5_a1g5b"]
+[ext_resource type="Texture2D" uid="uid://b74ykdqqxg5gx" path="res://assets/items + ui/star.png" id="6_0g8cn"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gtjmy"]
-bg_color = Color(0.172549, 0.564706, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_51gac"]
+font = ExtResource("3_k0goy")
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+outline_size = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2c4s"]
-bg_color = Color(0, 0.682353, 0.713726, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wtbp"]
-bg_color = Color(0.6, 0.52549, 0.937255, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_hp8na"]
+font = ExtResource("3_k0goy")
+font_size = 50
+outline_color = Color(0.00184107, 0.00184107, 0.00184107, 1)
 
 [node name="GameOver" type="CanvasLayer"]
+scale = Vector2(0.6, 0.6)
+transform = Transform2D(0.6, 0, 0, 0.6, 0, 0)
+
+[node name="GameOverScreen" type="Sprite2D" parent="."]
+texture = ExtResource("1_0avn7")
+centered = false
+
+[node name="NewHighScore" type="Sprite2D" parent="."]
+texture = ExtResource("2_wpjxa")
+centered = false
+
+[node name="Message" type="Label" parent="NewHighScore"]
+offset_left = 1346.0
+offset_top = 266.0
+offset_right = 1520.0
+offset_bottom = 358.0
+text = "NEW RECORD"
+label_settings = SubResource("LabelSettings_51gac")
 
 [node name="Button" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -27.5
-offset_right = 125.0
-offset_bottom = 27.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_ykggm")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_gtjmy")
-theme_override_styles/hover = SubResource("StyleBoxFlat_x2c4s")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_7wtbp")
-text = "RESTART"
+offset_left = 1290.0
+offset_top = 723.333
+offset_right = 1675.0
+offset_bottom = 905.333
+icon = ExtResource("4_2ss4q")
+flat = true
+
+[node name="Highscore" type="Label" parent="."]
+offset_left = 1338.0
+offset_top = 453.0
+offset_right = 1512.0
+offset_bottom = 545.0
+text = "BEST"
+label_settings = SubResource("LabelSettings_51gac")
+
+[node name="ScoreHolder" type="Sprite2D" parent="."]
+position = Vector2(1502, 385)
+scale = Vector2(1.61551, 1.64667)
+texture = ExtResource("5_a1g5b")
+
+[node name="Star" type="Sprite2D" parent="."]
+position = Vector2(1307, 376)
+scale = Vector2(0.512061, 0.512906)
+texture = ExtResource("6_0g8cn")
+
+[node name="Score" type="Label" parent="."]
+offset_left = 1376.0
+offset_top = 354.0
+offset_right = 1550.0
+offset_bottom = 446.0
+text = "SCORE"
+label_settings = SubResource("LabelSettings_hp8na")

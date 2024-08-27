@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://bicbjseswbfar"]
+
+[ext_resource type="Texture2D" uid="uid://brtmfrc0uidp" path="res://assets/background/1.png" id="1_c1iwt"]
+[ext_resource type="Texture2D" uid="uid://by871duy5xpwv" path="res://assets/background/2.png" id="2_auu6v"]
+[ext_resource type="Texture2D" uid="uid://d0yyp01wuuj64" path="res://assets/background/3.png" id="3_86ibn"]
+[ext_resource type="Texture2D" uid="uid://b47iihqpa6irb" path="res://assets/background/4.png" id="4_llwcs"]
+[ext_resource type="Texture2D" uid="uid://bdd6juiujd18p" path="res://assets/background/5.png" id="5_n1ycb"]
+[ext_resource type="Texture2D" uid="uid://du6qv300unair" path="res://assets/background/6.png" id="6_1b8bh"]
+
+[node name="Background" type="ParallaxBackground"]
+
+[node name="Fondo" type="Sprite2D" parent="."]
+texture = ExtResource("1_c1iwt")
+centered = false
+
+[node name="Nubes" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.98, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Nubes"]
+texture = ExtResource("2_auu6v")
+centered = false
+
+[node name="Far_Mountains" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.6, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Far_Mountains"]
+texture = ExtResource("3_86ibn")
+centered = false
+
+[node name="Far_Trees" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.7, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Far_Trees"]
+texture = ExtResource("4_llwcs")
+centered = false
+
+[node name="Trees" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.8, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees"]
+texture = ExtResource("5_n1ycb")
+centered = false
+
+[node name="Ground" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+texture = ExtResource("6_1b8bh")
+centered = false
