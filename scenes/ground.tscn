@@ -1,19 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://4en63s6mro00"]
+[gd_scene load_steps=3 format=3 uid="uid://b5pwnh1tmyrnl"]
 
-[ext_resource type="Texture2D" uid="uid://du6qv300unair" path="res://assets/background/6.png" id="1_m7qvf"]
+[ext_resource type="Texture2D" uid="uid://c1oqrqxusukd2" path="res://assets/img/background/ground.png" id="1_achns"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwfpu"]
-size = Vector2(1923.5, 57)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_te2nw"]
+size = Vector2(2304, 71)
 
 [node name="Ground" type="StaticBody2D"]
+scale = Vector2(1.5, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(0, 977)
-scale = Vector2(1, 0.0953704)
-texture = ExtResource("1_m7qvf")
+position = Vector2(0, 579)
+scale = Vector2(1, 0.71875)
+texture = ExtResource("1_achns")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(960.25, 1051.5)
-shape = SubResource("RectangleShape2D_uwfpu")
+position = Vector2(1152, 612.5)
+shape = SubResource("RectangleShape2D_te2nw")

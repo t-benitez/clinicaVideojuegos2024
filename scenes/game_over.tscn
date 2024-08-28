@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4ohrh21dcct3"]
+[gd_scene load_steps=9 format=3 uid="uid://lotwuige1aee"]
 
-[ext_resource type="Texture2D" uid="uid://c8rv1utw43mjd" path="res://assets/screens/fail screen.png" id="1_0avn7"]
-[ext_resource type="Texture2D" uid="uid://dsm3ctnuwdd6w" path="res://assets/screens/record  screen.png" id="2_wpjxa"]
+[ext_resource type="Texture2D" uid="uid://c8rv1utw43mjd" path="res://assets/screens/fail screen.png" id="1_xosdi"]
+[ext_resource type="Texture2D" uid="uid://dsm3ctnuwdd6w" path="res://assets/screens/record  screen.png" id="2_xrj1s"]
 [ext_resource type="FontFile" uid="uid://ougb0hvauetw" path="res://assets/items + ui/LilitaOne-Regular.ttf" id="3_k0goy"]
 [ext_resource type="Texture2D" uid="uid://dh3i3hg0g0exo" path="res://assets/items + ui/restart.png" id="4_2ss4q"]
 [ext_resource type="Texture2D" uid="uid://c70ipn8amsn2w" path="res://assets/items + ui/score_holder.png" id="5_a1g5b"]
@@ -23,11 +23,11 @@ scale = Vector2(0.6, 0.6)
 transform = Transform2D(0.6, 0, 0, 0.6, 0, 0)
 
 [node name="GameOverScreen" type="Sprite2D" parent="."]
-texture = ExtResource("1_0avn7")
+texture = ExtResource("1_xosdi")
 centered = false
 
 [node name="NewHighScore" type="Sprite2D" parent="."]
-texture = ExtResource("2_wpjxa")
+texture = ExtResource("2_xrj1s")
 centered = false
 
 [node name="Message" type="Label" parent="NewHighScore"]
