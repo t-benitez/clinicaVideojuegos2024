@@ -25,9 +25,11 @@ var screen_size : Vector2i
 var ground_height : int
 var game_running : bool
 var last_obs
+var firstTimeHit :bool = false 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$PreStartTheme.play()
 	screen_size = get_window().size
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
 	$GameOver.get_node("Button").pressed.connect(new_game)
@@ -39,7 +41,10 @@ func new_game():
 	score = 0
 	show_score()
 	game_running = false
+	firstTimeHit = false
 	get_tree().paused = false
+	
+	$MainTheme.play()
 	difficulty = 0
 	
 	#delete all obstacles
@@ -128,8 +133,13 @@ func remove_obs(obs):
 	obstacles.erase(obs)
 	
 func hit_obs(body):
+	
 	if body.name == "Dino":
-		game_over()
+		if !firstTimeHit:
+			firstTimeHit=true
+			$DeathSound.play()
+			game_over()
+		
 
 func show_score():
 	$HUD.get_node("Scores").get_node("ScoreLabel").text = "SCORE " + str(score / SCORE_MODIFIER)
@@ -145,15 +155,28 @@ func adjust_difficulty():
 		difficulty = MAX_DIFFICULTY
 
 func game_over():
+	# Reproduce el sonido de muerte
+	
+
+
+
+	# Verificar y actualizar la puntuación más alta
 	check_high_score()
-	get_tree().paused = true
-	game_running = false
+
+	# Mostrar pantalla de Game Over
 	$GameOver.get_node("Highscore").text = "BEST " + str(high_score / SCORE_MODIFIER)
 	$GameOver.get_node("Score").text = "SCORE " + str(score / SCORE_MODIFIER)
+	
 	if score >= high_score:
 		$GameOver.get_node("GameOverScreen").hide()
 		$GameOver.get_node("NewHighScore").show()
+		
 	else:
 		$GameOver.get_node("GameOverScreen").show()
 		$GameOver.get_node("NewHighScore").hide()
+		
 	$GameOver.show()
+	
+	await $DeathSound.finished
+	# Pausar el juego
+	get_tree().paused = true
