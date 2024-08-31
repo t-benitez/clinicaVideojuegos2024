@@ -5,10 +5,11 @@ const JUMP_SPEED : int = -1800
 var activeModeRunning : bool = true
 
 const FlappyBirdGravity : int = 1000
-const Max_Vel : int = 600
-const flapSpeed : int = -500
+const Max_Vel : int = 1500
+const flapSpeed : int = -600
 var flying : bool = false
 var falling : bool = false
+var ejecute : int =0
 
 
 
@@ -36,6 +37,9 @@ func _physics_process(delta):
 				velocity.y += GRAVITY * delta * 3
 	else:
 		if flying or falling:
+			$AnimatedSprite2D.play("flying")
+			$RunCol.disabled = true
+			$DuckCol.disabled = false
 			velocity.y += FlappyBirdGravity * delta
 			if velocity.y > Max_Vel:
 				velocity.y = Max_Vel
@@ -49,4 +53,15 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func flap():
+	ejecute = ejecute+1
+	print(ejecute)
 	velocity.y = flapSpeed
+func SetRotationToRunningMode():
+	set_rotation(0)
+	
+func normalize_velocity_before_mode_change():
+	# Ajusta la velocidad vertical en base a la diferencia de gravedad
+	if velocity.y < 0:  # Si el personaje está subiendo
+		velocity.y *= float(FlappyBirdGravity) / (GRAVITY/3.5)
+	elif velocity.y > 0:  # Si el personaje está cayendo
+		velocity.y = min(velocity.y, Max_Vel)

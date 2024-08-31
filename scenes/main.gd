@@ -5,6 +5,11 @@ var stump_scene = preload("res://scenes/stump.tscn")
 var rock_scene = preload("res://scenes/rock.tscn")
 var barrel_scene = preload("res://scenes/barrel.tscn")
 var bird_scene = preload("res://scenes/bird.tscn")
+var tuberia1 = preload("res://scenes/Tuberia1.tscn")
+var tuberia2 = preload("res://scenes/Tuberia2.tscn")
+var tuberia3 = preload("res://scenes/Tuberia3.tscn")
+var obstacleFlying := [tuberia1, tuberia2, tuberia3]
+var obstacleRunning := [stump_scene, rock_scene, barrel_scene]
 var obstacle_types := [stump_scene, rock_scene, barrel_scene]
 var obstacles : Array
 var bird_heights := [200, 390]
@@ -27,6 +32,9 @@ var game_running : bool
 var last_obs
 var firstTimeHit :bool = false 
 var isFlying : bool = false
+var can_flap : bool = true
+var runningPoints : int =0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,6 +52,7 @@ func new_game():
 	game_running = false
 	firstTimeHit = false
 	get_tree().paused = false
+	runningPoints = 0
 	
 	$MainTheme.play()
 	difficulty = 0
@@ -65,6 +74,8 @@ func new_game():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if !Input.is_action_pressed("ui_accept"):  # Si el botón ya no está presionado
+		can_flap = true
 	if game_running:
 		#speed up and adjust difficulty
 		speed = START_SPEED + score / SPEED_MODIFIER
@@ -80,8 +91,13 @@ func _process(delta):
 		$Camera2D.position.x += speed
 		
 		#update score
-		score += speed
+		if isFlying:
+			score += speed*2
+		else:
+			score += speed
 		show_score()
+		if (runningPoints+5000 < score):
+			start_FlyingMode()
 		
 		#update ground position
 		if $Camera2D.position.x - $Ground.position.x > screen_size.x * 1.5:
@@ -110,6 +126,12 @@ func generate_obs():
 			var obs_y : int
 			if obs_type == barrel_scene :
 				obs_y = DINO_START_POS.y + 52
+			elif obs_type == tuberia1:
+				obs_y = DINO_START_POS.y + 75
+			elif obs_type == tuberia2:
+				obs_y = DINO_START_POS.y + 100
+			elif obs_type == tuberia3:
+				obs_y = DINO_START_POS.y - 470
 			else:
 				obs_y = DINO_START_POS.y + 41
 			last_obs = obs
@@ -136,20 +158,43 @@ func remove_obs(obs):
 func hit_obs(body):
 	
 	if body.name == "Dino":
-		if !firstTimeHit:
+		if isFlying:
+			$DeathSound.play()
+			change_RunningMode()
+			
+		elif !firstTimeHit:
 			firstTimeHit=true
 			$DeathSound.play()
 			game_over()
 		
 func _input(event):
 	if isFlying:
-		if Input.is_action_pressed("ui_accept"):
+		if can_flap and Input.is_action_just_pressed("ui_accept"):
 			if $Dino.flying:
 				$Dino.flap()
+				can_flap = false
 func start_FlyingMode():
+	obstacle_types = obstacleFlying
+	
 	isFlying = true
+	
 	$Dino.flying = true
-	$Dino.flap()
+	$Dino.activeModeRunning = false
+	$Dino.normalize_velocity_before_mode_change()
+func change_RunningMode():
+	runningPoints = score
+	removeObstaclesInChangeMode()
+	obstacle_types = obstacleRunning
+	isFlying =false
+	$Dino.SetRotationToRunningMode()
+	$Dino.flying = false
+	$Dino.activeModeRunning = true
+	
+func removeObstaclesInChangeMode():
+	while obstacles.size() > 0:
+		var obs = obstacles.pop_back()  
+		obs.queue_free()
+		
 
 func show_score():
 	$HUD.get_node("Scores").get_node("ScoreLabel").text = "SCORE " + str(score / SCORE_MODIFIER)
@@ -189,4 +234,5 @@ func game_over():
 	
 	await $DeathSound.finished
 	# Pausar el juego
+	# process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().paused = true

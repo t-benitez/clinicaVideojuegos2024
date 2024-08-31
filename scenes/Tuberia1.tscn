@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://tesvy2arhbcp"]
+
+[ext_resource type="Texture2D" uid="uid://bdu5rpuhftug2" path="res://assets/props - enemys/obstacle2.png" id="1_gc5pj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ns6f"]
+size = Vector2(640, 1500)
+
+[node name="Stump" type="Area2D"]
+position = Vector2(0, -250)
+scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -559)
+scale = Vector2(4, 7.77703)
+texture = ExtResource("1_gc5pj")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-180, -5050)
+scale = Vector2(-4, -7.777)
+texture = ExtResource("1_gc5pj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-69.9999, -215)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_8ns6f")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-110, -5050)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_8ns6f")
