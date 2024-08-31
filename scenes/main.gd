@@ -26,6 +26,7 @@ var ground_height : int
 var game_running : bool
 var last_obs
 var firstTimeHit :bool = false 
+var isFlying : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -140,6 +141,15 @@ func hit_obs(body):
 			$DeathSound.play()
 			game_over()
 		
+func _input(event):
+	if isFlying:
+		if Input.is_action_pressed("ui_accept"):
+			if $Dino.flying:
+				$Dino.flap()
+func start_FlyingMode():
+	isFlying = true
+	$Dino.flying = true
+	$Dino.flap()
 
 func show_score():
 	$HUD.get_node("Scores").get_node("ScoreLabel").text = "SCORE " + str(score / SCORE_MODIFIER)
